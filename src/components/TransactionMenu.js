@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 
+
+//function with props
 const TransactionMenu = ({onIncome,onExpense}) => {
 
+  //state for each field
     const [menu,setMenu]=useState(false);
     const [data,setData]=useState([]);
     const [amount,setAmount]=useState();
     const [title,setTitle]=useState("");
     const [transactionType,setTransactionType]=useState('expense');
+    
+    
     const toggleButton=()=>{
         console.log(menu)
         setMenu(!menu)
@@ -21,16 +26,19 @@ const TransactionMenu = ({onIncome,onExpense}) => {
       title:title,
       transactionType:transactionType
     }
-if(!amount || !title){
-alert('Amount and title are required for transactions');
-return;
-}
 
-if(transactionType=='income'){
-onIncome(Number(amount));
-}else{
-onExpense(Number(amount));
-}
+    //Validation
+    if(!amount || !title){
+    alert('Amount and title are required for transactions');
+    return;
+    }
+
+    //based on transaction type calling the props functions
+    if(transactionType=='income'){
+    onIncome(Number(amount));
+    }else{
+    onExpense(Number(amount));
+    }
 
 setData((prevData)=>[...prevData,info] );
 setAmount("")
